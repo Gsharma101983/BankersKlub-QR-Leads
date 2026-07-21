@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BankersKlub | Start Your Mandate</title>
+<style>
+  :root{
+    --navy:#0B1F3A;
+    --navy-deep:#071528;
+    --gold:#C9973A;
+    --gold-soft:#E4C88B;
+    --paper:#F6F4EF;
+    --ink:#16233B;
+    --muted:#5B6B85;
+    --line:#DDD9CD;
+    --white:#FFFFFF;
+    --radius:14px;
+    --serif:'Source Serif 4','Georgia',serif;
+    --sans:'Inter','Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);}
+  a{color:inherit;}
+
+  /* Header */
+  header{
+    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:var(--white);
+    padding:36px 20px 44px;
+    text-align:center;
+    position:relative;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:-1px;
+    height:24px;
+    background:var(--paper);
+    border-radius:24px 24px 0 0;
+  }
+  .logo{
+    height:44px;
+    width:auto;
+    display:block;
+    margin:0 auto;
+  }
+  .tagline{
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin-top:12px;
+    opacity:0.9;
+  }
+  .lede{
+    max-width:520px;
+    margin:22px auto 0;
+    font-size:15.5px;
+    line-height:1.55;
+    color:#DCE3F0;
+  }
+
+  main{max-width:640px;margin:0 auto;padding:0 18px 60px;}
+
+  .section-label{
+    font-family:var(--serif);
+    font-size:21px;
+    margin:34px 0 4px;
+    color:var(--navy);
+  }
+  .section-sub{
+    font-size:13.5px;
+    color:var(--muted);
+    margin-bottom:18px;
+  }
+
+  /* Journey grid */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 14px;
+    cursor:pointer;
+    text-align:left;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    min-height:96px;
+  }
+  .card:hover, .card:focus-visible{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(11,31,58,0.10);
+    border-color:var(--gold);
+    outline:none;
+  }
+  .card.active{
+    border-color:var(--gold);
+    background:#FDF9F1;
+  }
+  .card .icon{font-size:20px;}
+  .card .label{font-weight:600;font-size:14.5px;color:var(--navy);line-height:1.25;}
+  .card .hint{font-size:11.5px;color:var(--muted);}
+
+  /* Form panel */
+  .panel{
+    display:none;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 20px 24px;
+    margin-top:22px;
+    animation:fade .25s ease;
+  }
+  .panel.open{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .panel h3{
+    font-family:var(--serif);
+    color:var(--navy);
+    margin:0 0 4px;
+    font-size:19px;
+  }
+  .panel .panel-sub{font-size:12.5px;color:var(--muted);margin-bottom:16px;}
+
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--navy);
+    margin-bottom:5px;
+  }
+  .field .opt-tag{font-weight:400;color:var(--muted);font-size:11px;}
+  .field input[type=text],
+  .field input[type=tel],
+  .field input[type=email],
+  .field input[type=number],
+  .field select,
+  .field textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:14.5px;
+    font-family:var(--sans);
+    background:#FCFBF9;
+    color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:64px;}
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+    background:var(--white);
+  }
+  .checkbox-group{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .checkbox-group label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:400;
+    font-size:13px;
+    background:#F3F1EA;
+    border:1px solid var(--line);
+    padding:7px 10px;
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .checkbox-group input{margin:0;}
+
+  .submit-btn{
+    width:100%;
+    padding:14px;
+    background:var(--navy);
+    color:var(--white);
+    border:none;
+    border-radius:9px;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    cursor:pointer;
+    margin-top:6px;
+    transition:background .15s ease;
+  }
+  .submit-btn:hover{background:var(--navy-deep);}
+
+  .zoho-slot{
+    border:1.5px dashed var(--gold);
+    background:#FDF9F1;
+    border-radius:10px;
+    padding:14px;
+    font-size:12px;
+    color:var(--muted);
+    margin-top:10px;
+  }
+  .zoho-slot code{
+    display:block;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:8px;
+    margin-top:6px;
+    font-size:11px;
+    color:var(--navy);
+    overflow-x:auto;
+  }
+
+  .thanks{
+    display:none;
+    text-align:center;
+    padding:30px 10px;
+  }
+  .thanks.open{display:block;}
+  .thanks .tick{
+    width:52px;height:52px;border-radius:50%;
+    background:var(--navy);color:var(--gold-soft);
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;margin:0 auto 14px;
+  }
+
+  .placeholder-note{
+    font-size:12.5px;
+    color:var(--muted);
+    background:#F3F1EA;
+    border-radius:8px;
+    padding:12px 14px;
+    line-height:1.5;
+  }
+
+  footer{
+    background:var(--navy-deep);
+    color:#C9D2E3;
+    padding:34px 20px 26px;
+    margin-top:8px;
+  }
+  .foot-wrap{
+    max-width:640px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .foot-logo{height:34px;width:auto;margin-bottom:16px;}
+  .foot-contact{
+    font-size:13px;
+    line-height:1.7;
+    color:#C9D2E3;
+    margin-bottom:18px;
+  }
+  .foot-contact a{color:var(--gold-soft);text-decoration:none;}
+  .foot-address{
+    font-size:12px;
+    color:#8C9AB8;
+    line-height:1.6;
+    max-width:420px;
+    margin:0 auto 18px;
+  }
+  .foot-legal{
+    font-size:11px;
+    color:#6E7C9A;
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:16px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo" src="https://bankersklub.com/bankersWhite.png" alt="BankersKlub">
+  <p class="tagline">Financial Advisory</p>
+  <p class="lede">Tell us what you need — a retail loan, corporate funding, a referral or a fundraise — and our team will connect with you within 24 hours.</p>
+</header>
+
+<main>
+  <p class="section-label">1. What are you here for?</p>
+  <p class="section-sub">Select a journey to open the right form.</p>
+
+  <div class="grid" id="journeyGrid">
+    <button class="card" data-journey="retail"><span class="icon">🏠</span><span class="label">Retail Loan</span><span class="hint">Home, Personal, Auto, LAP</span></button>
+    <button class="card" data-journey="corporate"><span class="icon">🏢</span><span class="label">Corporate Loan / Funding</span><span class="hint">Debt, Equity, Advisory</span></button>
+    <button class="card" data-journey="workingcapital"><span class="icon">💼</span><span class="label">Working Capital</span><span class="hint">CC / OD / Bill Discounting</span></button>
+    <button class="card" data-journey="lap"><span class="icon">📄</span><span class="label">Loan Against Property</span><span class="hint">Business / Personal</span></button>
+    <button class="card" data-journey="termloan"><span class="icon">🏗️</span><span class="label">Business / Term Loan</span><span class="hint">Expansion, Capex</span></button>
+    <button class="card" data-journey="equity"><span class="icon">📈</span><span class="label">Equity Fundraising</span><span class="hint">PE / VC / Family Office</span></button>
+    <button class="card" data-journey="advisory"><span class="icon">🤝</span><span class="label">M&amp;A / Advisory</span><span class="hint">Strategic advisory</span></button>
+    <button class="card" data-journey="referral"><span class="icon">⭐</span><span class="label">Refer a Client</span><span class="hint">Know someone who needs funding?</span></button>
+    <button class="card" data-journey="partner"><span class="icon">🧭</span><span class="label">Become a Channel Partner</span><span class="hint">Bankers / DSAs / Connectors</span></button>
+  </div>
+
+  <!-- RETAIL LOAN FORM -->
+  <div class="panel" id="panel-retail">
+    <h3>Retail Loan Lead</h3>
+    <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
+
+    <form onsubmit="return handleSubmit(event,'retail')">
+      <div class="field"><label>Name</label><input type="text" required></div>
+      <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
+      <div class="field"><label>Email ID <span class="opt-tag">(optional)</span></label><input type="email"></div>
+      <div class="field"><label>City</label><input type="text" required></div>
+      <div class="field"><label>Loan Product Required</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Home Loan</option>
+          <option>Personal Loan</option>
+          <option>Loan Against Property</option>
+          <option>Auto Loan</option>
+          <option>Business Loan</option>
+          <option>Credit Card</option>
+          <option>Education Loan</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label>Loan Amount</label><input type="text" placeholder="e.g. ₹15,00,000" required></div>
+      <div class="field"><label>Occupation</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Salaried</option>
+          <option>Self-Employed</option>
+        </select>
+      </div>
+      <div class="field"><label>Preferred Time to Connect</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Morning (9–12)</option>
+          <option>Afternoon (12–4)</option>
+          <option>Evening (4–8)</option>
+          <option>Anytime</option>
+        </select>
+      </div>
+      <div class="field"><label>Additional Remarks <span class="opt-tag">(optional)</span></label><textarea></textarea></div>
+      <button class="submit-btn" type="submit">Submit Enquiry</button>
+    </form>
+
+    <div class="zoho-slot">
+      <strong>Zoho CRM embed goes here.</strong> Once this Webform is created in Zoho CRM (Setup → Developer Space → Webforms → Leads), paste its generated &lt;iframe&gt; or JS embed snippet in place of the demo form above.
+    </div>
+  </div>
+
+  <!-- CORPORATE LOAN FORM -->
+  <div class="panel" id="panel-corporate">
+    <h3>BankersKlub Corporate Lead Form</h3>
+    <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
+
+    <form onsubmit="return handleSubmit(event,'corporate')">
+      <div class="field"><label>Company Name</label><input type="text" required></div>
+      <div class="field"><label>Contact Person Name</label><input type="text" required></div>
+      <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
+      <div class="field"><label>Official Email ID</label><input type="email" required></div>
+
+      <div class="field"><label>Industry</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Manufacturing</option><option>IT &amp; Software</option><option>Healthcare</option>
+          <option>Pharma</option><option>FMCG</option><option>Retail</option><option>Logistics</option>
+          <option>Real Estate</option><option>Infrastructure</option><option>Education</option>
+          <option>Financial Services</option><option>Hospitality</option><option>Agriculture</option>
+          <option>Renewable Energy</option><option>Others</option>
+        </select>
+      </div>
+
+      <div class="field"><label>Annual Turnover</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Below ₹10 Cr</option><option>₹10–25 Cr</option><option>₹25–50 Cr</option>
+          <option>₹50–100 Cr</option><option>₹100–250 Cr</option><option>₹250–500 Cr</option>
+          <option>Above ₹500 Cr</option>
+        </select>
+      </div>
+
+      <div class="field"><label>EBITDA</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Below ₹5 Cr</option><option>₹5–10 Cr</option><option>₹10–25 Cr</option>
+          <option>₹25–50 Cr</option><option>Above ₹50 Cr</option>
+        </select>
+      </div>
+
+      <div class="field"><label>Business Requirement <span class="opt-tag">(select all that apply)</span></label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" value="Equity Fundraising">Equity Fundraising</label>
+          <label><input type="checkbox" value="Debt Funding">Debt Funding</label>
+          <label><input type="checkbox" value="Working Capital">Working Capital</label>
+          <label><input type="checkbox" value="Business Loan">Business Loan</label>
+          <label><input type="checkbox" value="Loan Against Property">Loan Against Property</label>
+          <label><input type="checkbox" value="IPO / Pre-IPO Advisory">IPO / Pre-IPO Advisory</label>
+          <label><input type="checkbox" value="M&A Advisory">M&amp;A Advisory</label>
+          <label><input type="checkbox" value="Financial Advisory">Financial Advisory</label>
+          <label><input type="checkbox" value="Investment Banking">Investment Banking</label>
+          <label><input type="checkbox" value="Other">Other</label>
+        </div>
+      </div>
+
+      <div class="field"><label>Funding Requirement</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Below ₹5 Cr</option><option>₹5–10 Cr</option><option>₹10–25 Cr</option>
+          <option>₹25–50 Cr</option><option>₹50–100 Cr</option><option>₹100 Cr+</option>
+        </select>
+      </div>
+
+      <div class="field"><label>Timeline</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Immediate</option><option>Within 30 Days</option><option>1–3 Months</option>
+          <option>3–6 Months</option><option>Just Exploring</option>
+        </select>
+      </div>
+
+      <div class="field"><label>State</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Andhra Pradesh</option><option>Bihar</option><option>Delhi NCR</option><option>Gujarat</option>
+          <option>Haryana</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
+          <option>Maharashtra</option><option>Punjab</option><option>Rajasthan</option><option>Tamil Nadu</option>
+          <option>Telangana</option><option>Uttar Pradesh</option><option>West Bengal</option><option>Other</option>
+        </select>
+      </div>
+
+      <div class="field"><label>Additional Comments <span class="opt-tag">(optional)</span></label><textarea></textarea></div>
+      <button class="submit-btn" type="submit">Submit Enquiry</button>
+    </form>
+
+    <div class="zoho-slot">
+      <strong>Zoho CRM embed goes here.</strong> Business Requirement must be created as a <em>Multi-Select Picklist</em> field in Zoho before adding it to the Webform. Paste the Webform's iframe/JS snippet in place of the demo form above.
+    </div>
+  </div>
+
+  <!-- PLACEHOLDER PANELS FOR REMAINING JOURNEYS -->
+  <div class="panel" id="panel-workingcapital">
+    <h3>Working Capital Requirement</h3>
+    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
+    <p class="placeholder-note">Suggested fields: Company/Individual Name, Mobile, Email, City/State, Facility Type (CC / OD / Bill Discounting / Invoice Financing), Existing Limit, Required Limit, Bank/Lender Currently Used, Timeline, Remarks.</p>
+  </div>
+  <div class="panel" id="panel-lap">
+    <h3>Loan Against Property</h3>
+    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
+    <p class="placeholder-note">Suggested fields: Name, Mobile, Email, City, Property Type (Residential/Commercial), Property Value, Loan Amount Required, Purpose (Business/Personal), Occupation, Preferred Time to Connect.</p>
+  </div>
+  <div class="panel" id="panel-termloan">
+    <h3>Business / Term Loan</h3>
+    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
+    <p class="placeholder-note">Suggested fields: Company Name, Contact Person, Mobile, Email, Industry, Turnover, Loan Purpose (Expansion/Capex/Machinery), Amount Required, Timeline, State.</p>
+  </div>
+  <div class="panel" id="panel-equity">
+    <h3>Equity Fundraising</h3>
+    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
+    <p class="placeholder-note">Suggested fields: Company Name, Contact Person, Mobile, Email, Industry, Turnover, EBITDA, Round Stage (Seed/Series A/Growth/Pre-IPO), Amount Being Raised, Timeline, State.</p>
+  </div>
+  <div class="panel" id="panel-advisory">
+    <h3>M&amp;A / Financial Advisory</h3>
+    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
+    <p class="placeholder-note">Suggested fields: Company Name, Contact Person, Mobile, Email, Industry, Advisory Type (M&A / Valuation / Due-Diligence / Restructuring), Deal Size, Timeline, Remarks.</p>
+  </div>
+  <div class="panel" id="panel-referral">
+    <h3>Refer a Client</h3>
+    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
+    <p class="placeholder-note">Suggested fields: Your Name, Your Mobile, Your Relationship to the Lead, Referred Person's Name, Referred Person's Mobile, Requirement Type, City, Remarks.</p>
+  </div>
+  <div class="panel" id="panel-partner">
+    <h3>Become a Channel Partner</h3>
+    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
+    <p class="placeholder-note">Suggested fields: Name, Mobile, Email, City, Current Profile (Banker/DSA/CA/Connector), Years of Experience, Network Strength, Products You Can Refer, Remarks.</p>
+  </div>
+
+  <div class="thanks" id="thanksPanel">
+    <div class="tick">✓</div>
+    <h3 style="font-family:var(--serif);color:var(--navy);margin:0 0 6px;">Thank you</h3>
+    <p style="color:var(--muted);font-size:14px;">Your details have been received. A BankersKlub representative will reach out shortly.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-wrap">
+    <img class="foot-logo" src="https://bankersklub.com/bankersWhite.png" alt="BankersKlub">
+    <div class="foot-contact">
+      <div><a href="tel:+917042721408">+91 70427 21408</a> &nbsp;·&nbsp; <a href="mailto:support@bankersklub.com">support@bankersklub.com</a></div>
+      <div>Mon–Fri, 9 AM–8 PM IST</div>
+    </div>
+    <div class="foot-address">
+      <strong>Head Office</strong> — 95, 2nd Floor, Okhla Industrial Area Phase 3, New Delhi, India 110020
+    </div>
+    <div class="foot-legal">
+      BankersKlub is a unit of RE-Attire India Pvt. Ltd. · Your data is used solely to process your enquiry.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const cards = document.querySelectorAll('.card');
+  const panels = document.querySelectorAll('.panel');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      cards.forEach(c => c.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('open'));
+      card.classList.add('active');
+      const j = card.dataset.journey;
+      const panel = document.getElementById('panel-' + j);
+      if (panel) {
+        panel.classList.add('open');
+        panel.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  function handleSubmit(e, journey){
+    e.preventDefault();
+    // Demo-only handler. Once the Zoho CRM Webform embed replaces the form
+    // above, Zoho handles submission natively — remove this JS handler.
+    panels.forEach(p => p.classList.remove('open'));
+    document.getElementById('thanksPanel').classList.add('open');
+    document.getElementById('thanksPanel').scrollIntoView({behavior:'smooth', block:'start'});
+    return false;
+  }
+</script>
+
+</body>
+</html>
