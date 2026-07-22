@@ -307,14 +307,14 @@
     <h3>Retail Loan Lead</h3>
     <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
 
-    <form onsubmit="return handleSubmit(event,'retail')">
+    <form onsubmit="return handleSubmit(event,'retail')" id="form-retail">
       <input type="hidden" name="Referred_By_Banker" id="referredByBanker_retail">
-      <div class="field"><label>Name</label><input type="text" required></div>
-      <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
-      <div class="field"><label>Email ID <span class="opt-tag">(optional)</span></label><input type="email"></div>
-      <div class="field"><label>City</label><input type="text" required></div>
+      <div class="field"><label>Name</label><input type="text" name="Name" required></div>
+      <div class="field"><label>Mobile Number</label><input type="tel" name="Mobile_Number" required pattern="[0-9]{10}"></div>
+      <div class="field"><label>Email ID <span class="opt-tag">(optional)</span></label><input type="email" name="Email_ID"></div>
+      <div class="field"><label>City</label><input type="text" name="City" required></div>
       <div class="field"><label>Loan Product Required</label>
-        <select required>
+        <select name="Loan_Product_Required" required>
           <option value="">Select</option>
           <option>Home Loan</option>
           <option>Personal Loan</option>
@@ -326,16 +326,16 @@
           <option>Other</option>
         </select>
       </div>
-      <div class="field"><label>Loan Amount</label><input type="text" placeholder="e.g. ₹15,00,000" required></div>
+      <div class="field"><label>Loan Amount</label><input type="text" name="Loan_Amount" placeholder="e.g. ₹15,00,000" required></div>
       <div class="field"><label>Occupation</label>
-        <select required>
+        <select name="Occupation" required>
           <option value="">Select</option>
           <option>Salaried</option>
           <option>Self-Employed</option>
         </select>
       </div>
       <div class="field"><label>Preferred Time to Connect</label>
-        <select required>
+        <select name="Preferred_Time_to_Connect" required>
           <option value="">Select</option>
           <option>Morning (9–12)</option>
           <option>Afternoon (12–4)</option>
@@ -343,7 +343,7 @@
           <option>Anytime</option>
         </select>
       </div>
-      <div class="field"><label>Additional Remarks <span class="opt-tag">(optional)</span></label><textarea></textarea></div>
+      <div class="field"><label>Additional Remarks <span class="opt-tag">(optional)</span></label><textarea name="Additional_Remarks"></textarea></div>
       <button class="submit-btn" type="submit">Submit Enquiry</button>
     </form>
 
@@ -357,15 +357,15 @@
     <h3>BankersKlub Corporate Lead Form</h3>
     <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
 
-    <form onsubmit="return handleSubmit(event,'corporate')">
+    <form onsubmit="return handleSubmit(event,'corporate')" id="form-corporate">
       <input type="hidden" name="Referred_By_Banker" id="referredByBanker_corporate">
-      <div class="field"><label>Company Name</label><input type="text" required></div>
-      <div class="field"><label>Contact Person Name</label><input type="text" required></div>
-      <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
-      <div class="field"><label>Official Email ID</label><input type="email" required></div>
+      <div class="field"><label>Company Name</label><input type="text" name="Company_Name" required></div>
+      <div class="field"><label>Contact Person Name</label><input type="text" name="Contact_Person_Name" required></div>
+      <div class="field"><label>Mobile Number</label><input type="tel" name="Mobile_Number" required pattern="[0-9]{10}"></div>
+      <div class="field"><label>Official Email ID</label><input type="email" name="Official_Email_ID" required></div>
 
       <div class="field"><label>Industry</label>
-        <select required>
+        <select name="Industry" required>
           <option value="">Select</option>
           <option>Manufacturing</option><option>IT &amp; Software</option><option>Healthcare</option>
           <option>Pharma</option><option>FMCG</option><option>Retail</option><option>Logistics</option>
@@ -376,7 +376,7 @@
       </div>
 
       <div class="field"><label>Annual Turnover</label>
-        <select required>
+        <select name="Annual_Turnover" required>
           <option value="">Select</option>
           <option>Below ₹10 Cr</option><option>₹10–25 Cr</option><option>₹25–50 Cr</option>
           <option>₹50–100 Cr</option><option>₹100–250 Cr</option><option>₹250–500 Cr</option>
@@ -385,7 +385,7 @@
       </div>
 
       <div class="field"><label>EBITDA</label>
-        <select required>
+        <select name="EBITDA" required>
           <option value="">Select</option>
           <option>Below ₹5 Cr</option><option>₹5–10 Cr</option><option>₹10–25 Cr</option>
           <option>₹25–50 Cr</option><option>Above ₹50 Cr</option>
@@ -393,7 +393,7 @@
       </div>
 
       <div class="field"><label>Business Requirement <span class="opt-tag">(select all that apply)</span></label>
-        <div class="checkbox-group">
+        <div class="checkbox-group" data-group="Business_Requirement">
           <label><input type="checkbox" value="Equity Fundraising">Equity Fundraising</label>
           <label><input type="checkbox" value="Debt Funding">Debt Funding</label>
           <label><input type="checkbox" value="Working Capital">Working Capital</label>
@@ -408,7 +408,7 @@
       </div>
 
       <div class="field"><label>Funding Requirement</label>
-        <select required>
+        <select name="Funding_Requirement" required>
           <option value="">Select</option>
           <option>Below ₹5 Cr</option><option>₹5–10 Cr</option><option>₹10–25 Cr</option>
           <option>₹25–50 Cr</option><option>₹50–100 Cr</option><option>₹100 Cr+</option>
@@ -416,7 +416,7 @@
       </div>
 
       <div class="field"><label>Timeline</label>
-        <select required>
+        <select name="Timeline" required>
           <option value="">Select</option>
           <option>Immediate</option><option>Within 30 Days</option><option>1–3 Months</option>
           <option>3–6 Months</option><option>Just Exploring</option>
@@ -424,7 +424,7 @@
       </div>
 
       <div class="field"><label>State</label>
-        <select required>
+        <select name="State" required>
           <option value="">Select</option>
           <option>Andhra Pradesh</option><option>Bihar</option><option>Delhi NCR</option><option>Gujarat</option>
           <option>Haryana</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
@@ -433,7 +433,7 @@
         </select>
       </div>
 
-      <div class="field"><label>Additional Comments <span class="opt-tag">(optional)</span></label><textarea></textarea></div>
+      <div class="field"><label>Additional Comments <span class="opt-tag">(optional)</span></label><textarea name="Additional_Comments"></textarea></div>
       <button class="submit-btn" type="submit">Submit Enquiry</button>
     </form>
 
@@ -447,14 +447,14 @@
     <h3>BKIF Donations</h3>
     <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
 
-    <form onsubmit="return handleSubmit(event,'bkifdonation')">
+    <form onsubmit="return handleSubmit(event,'bkifdonation')" id="form-bkifdonation">
       <input type="hidden" name="Referred_By_Banker" id="referredByBanker_bkifdonation">
-      <div class="field"><label>Name</label><input type="text" required></div>
-      <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
-      <div class="field"><label>Email ID</label><input type="email" required></div>
-      <div class="field"><label>City</label><input type="text" required></div>
+      <div class="field"><label>Name</label><input type="text" name="Name" required></div>
+      <div class="field"><label>Mobile Number</label><input type="tel" name="Mobile_Number" required pattern="[0-9]{10}"></div>
+      <div class="field"><label>Email ID</label><input type="email" name="Email_ID" required></div>
+      <div class="field"><label>City</label><input type="text" name="City" required></div>
       <div class="field"><label>State</label>
-        <select required>
+        <select name="State" required>
           <option value="">Select</option>
           <option>Andhra Pradesh</option><option>Bihar</option><option>Delhi NCR</option><option>Gujarat</option>
           <option>Haryana</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
@@ -475,15 +475,15 @@
     <h3>Refer Someone — Banker / Channel Partner</h3>
     <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
 
-    <form onsubmit="return handleSubmit(event,'referral')">
+    <form onsubmit="return handleSubmit(event,'referral')" id="form-referral">
       <input type="hidden" name="Referred_By_Banker" id="referredByBanker_referral">
-      <div class="field"><label>Referral Name <span class="opt-tag">(person you're referring)</span></label><input type="text" required></div>
-      <div class="field"><label>Name <span class="opt-tag">(your name)</span></label><input type="text" required></div>
-      <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
-      <div class="field"><label>Email ID</label><input type="email" required></div>
-      <div class="field"><label>City</label><input type="text" required></div>
+      <div class="field"><label>Referral Name <span class="opt-tag">(person you're referring)</span></label><input type="text" name="Referral_Name" required></div>
+      <div class="field"><label>Name <span class="opt-tag">(your name)</span></label><input type="text" name="Name" required></div>
+      <div class="field"><label>Mobile Number</label><input type="tel" name="Mobile_Number" required pattern="[0-9]{10}"></div>
+      <div class="field"><label>Email ID</label><input type="email" name="Email_ID" required></div>
+      <div class="field"><label>City</label><input type="text" name="City" required></div>
       <div class="field"><label>State</label>
-        <select required>
+        <select name="State" required>
           <option value="">Select</option>
           <option>Andhra Pradesh</option><option>Bihar</option><option>Delhi NCR</option><option>Gujarat</option>
           <option>Haryana</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
@@ -572,10 +572,46 @@
     });
   });
 
+  // --- Google Sheets backend (Apps Script Web App) ---
+  // Replace with your deployed Web App URL after completing the setup steps.
+  const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyQ1O9ZLQysUgzQ7OR8M97J5AJdmEm0Cti2yxcVKue2NtitJuaZOuvFBzx287EFtq7R/exec';
+
   function handleSubmit(e, journey){
     e.preventDefault();
-    // Demo-only handler. Once the Zoho CRM Webform embed replaces the form
-    // above, Zoho handles submission natively — remove this JS handler.
+    const form = document.getElementById('form-' + journey);
+
+    // Populate the hidden banker field right before we read the form
+    const bankerField = document.getElementById('referredByBanker_' + journey);
+    if (bankerField) bankerField.value = getBankerId();
+
+    const data = { Journey: journey, BankerID: getBankerId() };
+
+    form.querySelectorAll('input[name], select[name], textarea[name]').forEach(el => {
+      if (el.type === 'checkbox') return; // handled separately below
+      data[el.name] = el.value;
+    });
+
+    // Collect grouped checkboxes (e.g. Business Requirement) into one comma-separated value
+    form.querySelectorAll('.checkbox-group[data-group]').forEach(group => {
+      const key = group.dataset.group;
+      const checked = Array.from(group.querySelectorAll('input[type=checkbox]:checked')).map(c => c.value);
+      data[key] = checked.join(', ');
+    });
+
+    if (GAS_WEB_APP_URL.indexOf('PASTE_YOUR') === -1) {
+      fetch(GAS_WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      }).catch(() => { /* fire-and-forget: no-cors mode can't read the response anyway */ });
+    } else {
+      console.warn('GAS_WEB_APP_URL not set yet — submission was not sent anywhere.', data);
+    }
+
+    // Once a real Zoho embed replaces a demo form, Zoho handles its own
+    // submission — you can leave this Sheets POST running alongside it,
+    // or remove it, depending on whether you want both backends active.
     panels.forEach(p => p.classList.remove('open'));
     document.getElementById('thanksPanel').classList.add('open');
     document.getElementById('thanksPanel').scrollIntoView({behavior:'smooth', block:'start'});
