@@ -60,6 +60,17 @@
     line-height:1.55;
     color:#DCE3F0;
   }
+  .banker-badge{
+    display:inline-block;
+    margin-top:16px;
+    padding:6px 16px;
+    background:rgba(228,200,139,0.14);
+    border:1px solid var(--gold-soft);
+    border-radius:20px;
+    font-size:12px;
+    letter-spacing:0.5px;
+    color:var(--gold-soft);
+  }
 
   main{max-width:640px;margin:0 auto;padding:0 18px 60px;}
 
@@ -277,6 +288,7 @@
   <img class="logo" src="https://bankersklub.com/bankersWhite.png" alt="BankersKlub">
   <p class="tagline">Financial Advisory</p>
   <p class="lede">Tell us what you need — a retail loan, corporate funding, a referral or a fundraise — and our team will connect with you within 24 hours.</p>
+  <div id="bankerBadge" style="display:none;" class="banker-badge">Referred by Banker ID: <span id="bankerIdText"></span></div>
 </header>
 
 <main>
@@ -286,13 +298,8 @@
   <div class="grid" id="journeyGrid">
     <button class="card" data-journey="retail"><span class="icon">🏠</span><span class="label">Retail Loan</span><span class="hint">Home, Personal, Auto, LAP</span></button>
     <button class="card" data-journey="corporate"><span class="icon">🏢</span><span class="label">Corporate Loan / Funding</span><span class="hint">Debt, Equity, Advisory</span></button>
-    <button class="card" data-journey="workingcapital"><span class="icon">💼</span><span class="label">Working Capital</span><span class="hint">CC / OD / Bill Discounting</span></button>
-    <button class="card" data-journey="lap"><span class="icon">📄</span><span class="label">Loan Against Property</span><span class="hint">Business / Personal</span></button>
-    <button class="card" data-journey="termloan"><span class="icon">🏗️</span><span class="label">Business / Term Loan</span><span class="hint">Expansion, Capex</span></button>
-    <button class="card" data-journey="equity"><span class="icon">📈</span><span class="label">Equity Fundraising</span><span class="hint">PE / VC / Family Office</span></button>
-    <button class="card" data-journey="advisory"><span class="icon">🤝</span><span class="label">M&amp;A / Advisory</span><span class="hint">Strategic advisory</span></button>
-    <button class="card" data-journey="referral"><span class="icon">⭐</span><span class="label">Refer a Client</span><span class="hint">Know someone who needs funding?</span></button>
-    <button class="card" data-journey="partner"><span class="icon">🧭</span><span class="label">Become a Channel Partner</span><span class="hint">Bankers / DSAs / Connectors</span></button>
+    <button class="card" data-journey="bkifdonation"><span class="icon">🤲</span><span class="label">BKIF Donations</span><span class="hint">Support the BKIF initiative</span></button>
+    <button class="card" data-journey="referral"><span class="icon">⭐</span><span class="label">Refer Someone</span><span class="hint">Banker / Channel Partner</span></button>
   </div>
 
   <!-- RETAIL LOAN FORM -->
@@ -301,6 +308,7 @@
     <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
 
     <form onsubmit="return handleSubmit(event,'retail')">
+      <input type="hidden" name="Referred_By_Banker" id="referredByBanker_retail">
       <div class="field"><label>Name</label><input type="text" required></div>
       <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
       <div class="field"><label>Email ID <span class="opt-tag">(optional)</span></label><input type="email"></div>
@@ -350,6 +358,7 @@
     <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
 
     <form onsubmit="return handleSubmit(event,'corporate')">
+      <input type="hidden" name="Referred_By_Banker" id="referredByBanker_corporate">
       <div class="field"><label>Company Name</label><input type="text" required></div>
       <div class="field"><label>Contact Person Name</label><input type="text" required></div>
       <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
@@ -433,41 +442,61 @@
     </div>
   </div>
 
-  <!-- PLACEHOLDER PANELS FOR REMAINING JOURNEYS -->
-  <div class="panel" id="panel-workingcapital">
-    <h3>Working Capital Requirement</h3>
-    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
-    <p class="placeholder-note">Suggested fields: Company/Individual Name, Mobile, Email, City/State, Facility Type (CC / OD / Bill Discounting / Invoice Financing), Existing Limit, Required Limit, Bank/Lender Currently Used, Timeline, Remarks.</p>
+  <!-- BKIF DONATIONS FORM -->
+  <div class="panel" id="panel-bkifdonation">
+    <h3>BKIF Donations</h3>
+    <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
+
+    <form onsubmit="return handleSubmit(event,'bkifdonation')">
+      <input type="hidden" name="Referred_By_Banker" id="referredByBanker_bkifdonation">
+      <div class="field"><label>Name</label><input type="text" required></div>
+      <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
+      <div class="field"><label>Email ID</label><input type="email" required></div>
+      <div class="field"><label>City</label><input type="text" required></div>
+      <div class="field"><label>State</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Andhra Pradesh</option><option>Bihar</option><option>Delhi NCR</option><option>Gujarat</option>
+          <option>Haryana</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
+          <option>Maharashtra</option><option>Punjab</option><option>Rajasthan</option><option>Tamil Nadu</option>
+          <option>Telangana</option><option>Uttar Pradesh</option><option>West Bengal</option><option>Other</option>
+        </select>
+      </div>
+      <button class="submit-btn" type="submit">Submit</button>
+    </form>
+
+    <div class="zoho-slot">
+      <strong>Zoho CRM embed goes here.</strong> Build this Webform in Zoho CRM (Setup → Developer Space → Webforms → Leads) with a Lead Source default of 'QR Code – BKIF Donation', then paste the generated embed in place of the demo form above.
+    </div>
   </div>
-  <div class="panel" id="panel-lap">
-    <h3>Loan Against Property</h3>
-    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
-    <p class="placeholder-note">Suggested fields: Name, Mobile, Email, City, Property Type (Residential/Commercial), Property Value, Loan Amount Required, Purpose (Business/Personal), Occupation, Preferred Time to Connect.</p>
-  </div>
-  <div class="panel" id="panel-termloan">
-    <h3>Business / Term Loan</h3>
-    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
-    <p class="placeholder-note">Suggested fields: Company Name, Contact Person, Mobile, Email, Industry, Turnover, Loan Purpose (Expansion/Capex/Machinery), Amount Required, Timeline, State.</p>
-  </div>
-  <div class="panel" id="panel-equity">
-    <h3>Equity Fundraising</h3>
-    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
-    <p class="placeholder-note">Suggested fields: Company Name, Contact Person, Mobile, Email, Industry, Turnover, EBITDA, Round Stage (Seed/Series A/Growth/Pre-IPO), Amount Being Raised, Timeline, State.</p>
-  </div>
-  <div class="panel" id="panel-advisory">
-    <h3>M&amp;A / Financial Advisory</h3>
-    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
-    <p class="placeholder-note">Suggested fields: Company Name, Contact Person, Mobile, Email, Industry, Advisory Type (M&A / Valuation / Due-Diligence / Restructuring), Deal Size, Timeline, Remarks.</p>
-  </div>
+
+  <!-- REFER SOMEONE FORM -->
   <div class="panel" id="panel-referral">
-    <h3>Refer a Client</h3>
-    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
-    <p class="placeholder-note">Suggested fields: Your Name, Your Mobile, Your Relationship to the Lead, Referred Person's Name, Referred Person's Mobile, Requirement Type, City, Remarks.</p>
-  </div>
-  <div class="panel" id="panel-partner">
-    <h3>Become a Channel Partner</h3>
-    <p class="panel-sub">Placeholder — build this Webform in Zoho CRM the same way as Retail/Corporate.</p>
-    <p class="placeholder-note">Suggested fields: Name, Mobile, Email, City, Current Profile (Banker/DSA/CA/Connector), Years of Experience, Network Strength, Products You Can Refer, Remarks.</p>
+    <h3>Refer Someone — Banker / Channel Partner</h3>
+    <p class="panel-sub">Fields map to Zoho CRM Leads module.</p>
+
+    <form onsubmit="return handleSubmit(event,'referral')">
+      <input type="hidden" name="Referred_By_Banker" id="referredByBanker_referral">
+      <div class="field"><label>Referral Name <span class="opt-tag">(person you're referring)</span></label><input type="text" required></div>
+      <div class="field"><label>Name <span class="opt-tag">(your name)</span></label><input type="text" required></div>
+      <div class="field"><label>Mobile Number</label><input type="tel" required pattern="[0-9]{10}"></div>
+      <div class="field"><label>Email ID</label><input type="email" required></div>
+      <div class="field"><label>City</label><input type="text" required></div>
+      <div class="field"><label>State</label>
+        <select required>
+          <option value="">Select</option>
+          <option>Andhra Pradesh</option><option>Bihar</option><option>Delhi NCR</option><option>Gujarat</option>
+          <option>Haryana</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
+          <option>Maharashtra</option><option>Punjab</option><option>Rajasthan</option><option>Tamil Nadu</option>
+          <option>Telangana</option><option>Uttar Pradesh</option><option>West Bengal</option><option>Other</option>
+        </select>
+      </div>
+      <button class="submit-btn" type="submit">Submit Referral</button>
+    </form>
+
+    <div class="zoho-slot">
+      <strong>Zoho CRM embed goes here.</strong> Build this Webform in Zoho CRM with a Lead Source default of 'QR Code – Referral', mapping Referral Name and Name to two separate custom fields so the referrer and the referred person don't get merged into one. Paste the generated embed in place of the demo form above.
+    </div>
   </div>
 
   <div class="thanks" id="thanksPanel">
@@ -494,6 +523,39 @@
 </footer>
 
 <script>
+  // --- Banker attribution: capture ?banker=BK001 from the URL ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const bankerId = urlParams.get('banker') || urlParams.get('ref') || '';
+
+  if (bankerId) {
+    document.getElementById('bankerIdText').textContent = bankerId;
+    document.getElementById('bankerBadge').style.display = 'inline-block';
+    // Persist across the visit in case of page navigation within the same session
+    try { sessionStorage.setItem('bk_referrer', bankerId); } catch (e) {}
+  }
+
+  function getBankerId(){
+    return bankerId || (function(){ try { return sessionStorage.getItem('bk_referrer') || ''; } catch(e){ return ''; } })();
+  }
+
+  // Once you replace a demo <form> with a real Zoho embed, call this after the
+  // embed is injected so the hidden "Referred By Banker" field gets the value:
+  //   setBankerFieldOnZohoForms();
+  // It looks for any input/select whose name or id contains "banker" (case-insensitive)
+  // inside each .panel and sets its value — match this to whatever field name
+  // Zoho generates for your custom "Referred By Banker" field.
+  function setBankerFieldOnZohoForms(){
+    const id = getBankerId();
+    if (!id) return;
+    document.querySelectorAll('.panel input, .panel select').forEach(el => {
+      const key = (el.name || el.id || '').toLowerCase();
+      if (key.includes('banker') || key.includes('referredby') || key.includes('referrer')) {
+        el.value = id;
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', setBankerFieldOnZohoForms);
+
   const cards = document.querySelectorAll('.card');
   const panels = document.querySelectorAll('.panel');
   cards.forEach(card => {
